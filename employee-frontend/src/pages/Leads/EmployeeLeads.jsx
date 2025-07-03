@@ -15,7 +15,7 @@ const EmployeeLeads = () => {
 	const fetchUserLeads = async () => {
 		try {
 			const response = await axios.get(
-				`http://localhost:5001/api/leads/user/${user._id}`
+				`${import.meta.env.VITE_API_URL}/api/leads/user/${user._id}`
 			)
 			setLeads(response.data)
 		} catch (error) {

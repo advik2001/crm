@@ -37,7 +37,7 @@
 // 		const fetchActivities = async () => {
 // 			try {
 // 				const res = await axios.get(
-// 					`http://localhost:5001/api/employee/activity/${user._id}`
+// 					`${import.meta.env.VITE_API_URL}/api/employee/activity/${user._id}`
 // 				)
 // 				setActivities(res.data)
 // 			} catch (err) {
@@ -48,7 +48,7 @@
 // 		const fetchAttendance = async () => {
 // 			try {
 // 				const res = await axios.get(
-// 					`http://localhost:5001/api/attendence/${user._id}`
+// 					`${import.meta.env.VITE_API_URL}/api/attendence/${user._id}`
 // 				)
 // 				setAttendanceRecords(res.data || [])
 // 			} catch (err) {
@@ -246,7 +246,7 @@ const CanovaCRM = () => {
 		const fetchActivities = async () => {
 			try {
 				const res = await axios.get(
-					`http://localhost:5001/api/employee/activity/${user._id}`
+					`${import.meta.env.VITE_API_URL}/api/employee/activity/${user._id}`
 				)
 				setActivities(res.data)
 			} catch (err) {
@@ -257,7 +257,7 @@ const CanovaCRM = () => {
 		const fetchAttendance = async () => {
 			try {
 				const res = await axios.get(
-					`http://localhost:5001/api/attendence/${user._id}`
+					`${import.meta.env.VITE_API_URL}/api/attendence/${user._id}`
 				)
 				setAttendanceRecords(res.data || [])
 			} catch (err) {
@@ -279,7 +279,7 @@ const CanovaCRM = () => {
 	// Logout handler
 	const handleLogout = async () => {
 		try {
-			await axios.post('http://localhost:5001/api/attendence/checkout', {
+			await axios.post(`${import.meta.env.VITE_API_URL}/api/attendence/checkout`, {
 				userId: user._id,
 			})
 			updateUser(null)

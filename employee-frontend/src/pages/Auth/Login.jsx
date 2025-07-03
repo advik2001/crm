@@ -54,11 +54,11 @@ const Login = () => {
 	const handleLogin = async (e) => {
 		e.preventDefault()
 		setIsLoading(true)
-
+ 
 		try {
 			// Step 1: Login API
 			const response = await axios.post(
-				'http://localhost:5001/api/auth/login',
+				`${import.meta.env.VITE_API_URL}/api/auth/login`,
 				{ email, password }
 			)
 
@@ -68,7 +68,7 @@ const Login = () => {
 				const userId = response.data._id // Adjust this if user ID is nested (e.g., response.data.user._id)
 
 				// Step 2: Attendance Check-In API
-				await axios.post('http://localhost:5001/api/attendence/checkin', {
+				await axios.post(`${import.meta.env.VITE_API_URL}/api/attendence/checkin`, {
 					userId: userId,
 				})
 

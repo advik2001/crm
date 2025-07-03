@@ -48,7 +48,7 @@ const Schedule = () => {
 		const fetchScheduledLeads = async () => {
 			try {
 				const res = await axios.get(
-					`http://localhost:5001/api/leads/user/${user._id}`
+					`${import.meta.env.VITE_API_URL}/api/leads/user/${user._id}`
 				)
 				const leadsWithSchedule = res.data.filter(
 					(lead) => lead.schedule_date && lead.schedule_time

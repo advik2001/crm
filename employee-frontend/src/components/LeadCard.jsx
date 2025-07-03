@@ -15,7 +15,7 @@ const LeadCard = ({ lead, onUpdate }) => {
 	const updateLead = async (updates) => {
 		try {
 			const res = await axios.put(
-				`http://localhost:5001/api/leads/update/${lead._id}`,
+				`${import.meta.env.VITE_API_URL}/api/leads/update/${lead._id}`,
 				updates
 			)
 			onUpdate() // refresh lead list

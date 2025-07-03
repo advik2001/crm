@@ -33,7 +33,7 @@
 // 		setError('')
 
 // 		try {
-// 			const response = await axios.put(`http://localhost:5001/api/employee/update/${user._id}`,
+// 			const response = await axios.put(`${import.meta.env.VITE_API_URL}/api/employee/update/${user._id}`,
 // 				formData
 // 			)
 
@@ -177,7 +177,7 @@
 // 		const fullName = `${formData.firstName} ${formData.lastName}`.trim()
 
 // 		try {
-// 			const response = await axios.put(`http://localhost:5001/api/employee/update/${user._id}`, {
+// 			const response = await axios.put(`${import.meta.env.VITE_API_URL}/api/employee/update/${user._id}`, {
 // 				name: fullName,
 // 				email: formData.email,
 // 				password: formData.password,
@@ -349,7 +349,7 @@ const Profile = () => {
 
 		try {
 			const response = await axios.put(
-				`http://localhost:5001/api/employee/update/${user._id}`,
+				`${import.meta.env.VITE_API_URL}/api/employee/update/${user._id}`,
 				{
 					name: fullName,
 					email: formData.email,
