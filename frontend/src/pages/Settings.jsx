@@ -121,7 +121,7 @@ const Settings = () => {
 			}
 
 			const response = await axios.put(
-				'http://localhost:5001/api/admin/update-profile',
+				`${import.meta.env.VITE_API_URL}/api/admin/update-profile`,
 				payload
 			)
 

@@ -9,7 +9,7 @@ import Settings from './pages/Settings'
 
 import './App.css'
 
-const App = () => {
+const App = () => { 
 	return (
 		<Routes>
 			{/* Admin Protected Routes */}

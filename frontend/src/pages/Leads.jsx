@@ -138,7 +138,7 @@ const Leads = () => {
 
 	const fetchCsvBatches = async () => {
 		try {
-			const res = await axios.get('http://localhost:5001/api/leads/csv-batches')
+			const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/leads/csv-batches`)
 			setCsvBatches(res.data)
 		} catch (err) {
 			console.error('Error fetching CSV batches:', err)
@@ -160,8 +160,8 @@ const Leads = () => {
 		formData.append('file', csvFile)
 
 		try {
-			await axios.post('http://localhost:5001/api/upload-csv', formData)
-			await axios.post('http://localhost:5001/api/leads/assign-leads')
+			await axios.post(`${import.meta.env.VITE_API_URL}/api/upload-csv`, formData)
+			await axios.post(`${import.meta.env.VITE_API_URL}/api/leads/assign-leads`)
 
 			setUploadMessage('CSV uploaded successfully')
 			setCsvFile(null)

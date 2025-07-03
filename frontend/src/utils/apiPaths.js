@@ -14,7 +14,7 @@ export const API_PATHS = {
 
 	ADMIN: {
 		GET_EMPLOYEES: '/api/admin/employees', // Get all employees data
-		UPDATE_PROFILE: 'api/admin/update-profile' // Update the user details
+		UPDATE_PROFILE: '/api/admin/update-profile' // Update the user details
 	},
 
 	// EMPLOYEE: {

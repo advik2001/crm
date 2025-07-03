@@ -538,7 +538,7 @@ const Employee = () => {
 		const fetchEmployees = async () => {
 			try {
 				const response = await axios.get(
-					'http://localhost:5001/api/admin/employees'
+					`${import.meta.env.VITE_API_URL}/api/admin/employees`
 				)
 				setEmployees(response.data || [])
 			} catch (err) {
@@ -587,7 +587,7 @@ const Employee = () => {
 				password: newEmployee.firstName,
 			}
 			const response = await axios.post(
-				'http://localhost:5001/api/auth/register',
+				`${import.meta.env.VITE_API_URL}/api/auth/register`,
 				payload
 			)
 			setEmployees((prev) => [...prev, response.data])
@@ -613,7 +613,9 @@ const Employee = () => {
 				email: newEmployee.email,
 			}
 			const response = await axios.put(
-				`http://localhost:5001/api/admin/employees/${selectedEmployee._id}`,
+				`${import.meta.env.VITE_API_URL}/api/admin/employees/${
+					selectedEmployee._id
+				}`,
 				payload
 			)
 			setEmployees((prev) =>
@@ -656,7 +658,7 @@ const Employee = () => {
 
 	const handleDelete = async (id) => {
 		try {
-			await axios.delete(`http://localhost:5001/api/admin/employees/${id}`)
+			await axios.delete(`${import.meta.env.VITE_API_URL}/api/admin/employees/${id}`)
 			setEmployees((prev) => prev.filter((emp) => emp._id !== id))
 		} catch (err) {
 			console.error('Failed to delete employee:', err)

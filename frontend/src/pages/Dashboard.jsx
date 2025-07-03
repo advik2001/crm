@@ -266,7 +266,7 @@ const Dashboard = () => {
 	const fetchActivities = async () => {
 		try {
 			const res = await axios.get(
-				'http://localhost:5001/api/admin/activity?limit=10'
+				`${import.meta.env.VITE_API_URL}/api/admin/activity?limit=10`
 			)
 			setActivities(res.data)
 		} catch (err) {
@@ -278,9 +278,9 @@ const Dashboard = () => {
 		const fetchData = async () => {
 			try {
 				const [empRes, leadsRes, salesRes] = await Promise.all([
-					axios.get('http://localhost:5001/api/admin/employees'),
-					axios.get('http://localhost:5001/api/leads'),
-					axios.get('http://localhost:5001/api/sales/data'),
+					axios.get(`${import.meta.env.VITE_API_URL}/api/admin/employees`),
+					axios.get(`${import.meta.env.VITE_API_URL}/api/leads`),
+					axios.get(`${import.meta.env.VITE_API_URL}/api/sales/data`),
 				])
 
 				setEmployees(empRes.data)
@@ -301,7 +301,7 @@ const Dashboard = () => {
 
 				// Calculate conversion rate
 				const closedLeadsRes = await axios.get(
-					'http://localhost:5001/api/sales/closed-leads'
+					`${import.meta.env.VITE_API_URL}/api/sales/closed-leads`
 				)
 				const closedLeads = closedLeadsRes.data.totalClosedLeads
 
