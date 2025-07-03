@@ -1,0 +1,279 @@
+/* Leads.css */
+
+.leads-container {
+  max-width: 1000px;
+  margin: 40px auto;
+  padding: 20px;
+  font-family: sans-serif;
+}
+
+.leads-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px;
+}
+
+.leads-header h2 {
+  margin: 0;
+  font-size: 24px;
+}
+
+.leads-header p {
+  margin: 5px 0 0;
+  color: #555;
+}
+
+.leads-header button {
+  padding: 8px 16px;
+  background-color: #007acc;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.leads-header button:hover {
+  background-color: #005fa3;
+}
+
+.leads-table-container {
+  overflow-x: auto;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.leads-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.leads-table th,
+.leads-table td {
+  padding: 12px 15px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+.leads-table th {
+  background-color: #f5f5f5;
+  font-weight: bold;
+}
+
+
+
+
+/* 
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal {
+  background-color: white;
+  padding: 20px 25px;
+  border-radius: 6px;
+  width: 300px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.modal h3 {
+  margin-top: 0;
+  font-size: 18px;
+}
+
+.modal input[type="file"] {
+  margin-top: 10px;
+  margin-bottom: 15px;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.modal-actions button {
+  padding: 6px 12px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.modal-actions button:first-child {
+  background-color: #ccc;
+  color: #333;
+}
+
+.modal-actions button:last-child {
+  background-color: #007acc;
+  color: #fff;
+}
+
+.upload-message {
+  margin-top: 10px;
+  color: green;
+  font-size: 14px;
+} */
+
+
+
+/* Modal Overlay */
+.modal-overlay {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100vw;
+	height: 100vh;
+	background: rgba(0, 0, 0, 0.4);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	z-index: 1000;
+}
+
+.modal {
+	background: #fff;
+	width: 500px;
+	border-radius: 12px;
+	padding: 24px 28px;
+	box-shadow: 0 6px 30px rgba(0, 0, 0, 0.15);
+	position: relative;
+	font-family: 'Inter', sans-serif;
+}
+
+/* Header */
+.modal h3 {
+	font-size: 18px;
+	font-weight: 600;
+	margin: 0;
+}
+
+.modal .subtext {
+	font-size: 14px;
+	color: #6b7280;
+	margin-bottom: 20px;
+}
+
+/* Close Icon */
+.modal .close-btn {
+	position: absolute;
+	top: 20px;
+	right: 24px;
+	font-size: 20px;
+	cursor: pointer;
+	color: #4b5563;
+}
+
+/* Drop Zone */
+.drop-box {
+	border: 1.5px dashed #9ca3af;
+	border-radius: 12px;
+	padding: 32px 20px;
+	text-align: center;
+	background-color: #fff;
+	margin-bottom: 24px;
+	transition: background-color 0.3s ease, border-color 0.3s ease;
+	cursor: pointer;
+}
+
+.drop-box.dragover {
+	background-color: #f3f4f6;
+	border-color: #2b7a78;
+}
+
+/* Upload Icon */
+.upload-icon {
+	width: 44px;
+	height: 44px;
+	margin: 0 auto 12px;
+}
+
+/* Drop zone text */
+.drop-box .instruction {
+	font-size: 15px;
+	font-weight: 500;
+	color: #111827;
+	margin-bottom: 6px;
+}
+
+.drop-box .or-text {
+	font-size: 13px;
+	color: #6b7280;
+	margin: 8px 0;
+}
+
+/* Browse files button */
+.browse-btn {
+	border: 1px solid #9ca3af;
+	background-color: white;
+	color: #111827;
+	font-size: 14px;
+	border-radius: 6px;
+	padding: 6px 12px;
+	cursor: pointer;
+	margin-top: 6px;
+}
+
+/* File preview */
+.file-preview {
+	margin-top: 16px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	border: 1px solid #d1d5db;
+	border-radius: 8px;
+	padding: 10px 14px;
+	background-color: #f9fafb;
+	font-size: 14px;
+	color: #374151;
+}
+
+/* File icon download */
+.file-preview .download-icon {
+	width: 16px;
+	height: 16px;
+}
+
+/* Footer buttons */
+.modal-actions {
+	display: flex;
+	justify-content: flex-end;
+	gap: 12px;
+	margin-top: 16px;
+}
+
+.modal-actions button {
+	font-size: 14px;
+	padding: 8px 16px;
+	border-radius: 8px;
+	border: none;
+	cursor: pointer;
+}
+
+.modal-actions .cancel-btn {
+	background-color: #f3f4f6;
+	color: #111827;
+}
+
+.modal-actions .primary-btn {
+	background-color: #002e2b;
+	color: white;
+	display: flex;
+	align-items: center;
+	gap: 6px;
+	padding-right: 20px;
+}
+
+.modal-actions .primary-btn:disabled {
+	opacity: 0.6;
+	cursor: not-allowed;
+}
