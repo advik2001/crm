@@ -33,7 +33,7 @@ app.use(express.json())
 // }));
 
 app.use(cors({
-  origin: ['https://crm-umber-phi.vercel.app', 'http://localhost:5175']
+  origin: ['https://crm-umber-phi.vercel.app', 'https://crm-employee-six.vercel.app']
 }));
 
 
