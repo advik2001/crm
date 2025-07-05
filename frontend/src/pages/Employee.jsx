@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import './Employee.css'
 import { getInitials } from '../utils/helper'
-import { useSearch } from '../context/SearchContext'
+import { useSearch } from '../context/SearchContext' 
 
 const Employee = () => {
 	const [employees, setEmployees] = useState([]) // Raw data

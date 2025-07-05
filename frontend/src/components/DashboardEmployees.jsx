@@ -37,9 +37,11 @@ const DashboardEmployees = ({ employees }) => {
 									<span className='badge'>#{emp._id}</span>
 								</td>
 								<td className='text-center'>
-									{emp.assignedLeads?.length || 0}
+									{emp.assignedLeadsCount || 0}
 								</td>
-								<td className='text-center'>{emp.closedLeads?.length || 0}</td>
+								<td className='text-center'>
+									{emp.closedLeadsCount || 0}
+								</td>
 								<td>
 									<span
 										className={`status ${
