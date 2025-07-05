@@ -1,7 +1,7 @@
 // import React, { useContext, useState } from 'react'
 // // import axiosInstance from '../utils/axiosInstance'
 // import axios from 'axios'
-// import { API_PATHS } from '../utils/apiPaths'
+
 
 // const Settings = () => {
 // 	// const { user, updateUser } = useContext(UserContext)

@@ -119,14 +119,12 @@
 
 // export default Leads
 
-
-
-
-
 // Frontend Version
+
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import './Leads.css'
+import { useSearch } from '../context/SearchContext'
 
 const Leads = () => {
 	const [csvBatches, setCsvBatches] = useState([])
@@ -136,9 +134,13 @@ const Leads = () => {
 	const [uploading, setUploading] = useState(false)
 	const [uploadMessage, setUploadMessage] = useState('')
 
+	const { searchQuery } = useSearch()
+
 	const fetchCsvBatches = async () => {
 		try {
-			const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/leads/csv-batches`)
+			const res = await axios.get(
+				`${import.meta.env.VITE_API_URL}/api/leads/csv-batches`
+			)
 			setCsvBatches(res.data)
 		} catch (err) {
 			console.error('Error fetching CSV batches:', err)
@@ -151,6 +153,17 @@ const Leads = () => {
 		fetchCsvBatches()
 	}, [])
 
+	const filteredBatches = csvBatches.filter((batch) => {
+		const query = searchQuery.toLowerCase()
+		return (
+			batch.name.toLowerCase().includes(query) ||
+			batch.totalLeads.toString().includes(query) ||
+			batch.assignedCount.toString().includes(query) ||
+			(batch.totalLeads - batch.assignedCount).toString().includes(query) ||
+			new Date(batch.uploadDate).toLocaleDateString().includes(query)
+		)
+	})
+
 	const handleCSVUpload = async () => {
 		if (!csvFile) return
 		setUploading(true)
@@ -160,7 +173,10 @@ const Leads = () => {
 		formData.append('file', csvFile)
 
 		try {
-			await axios.post(`${import.meta.env.VITE_API_URL}/api/upload-csv`, formData)
+			await axios.post(
+				`${import.meta.env.VITE_API_URL}/api/upload-csv`,
+				formData
+			)
 			await axios.post(`${import.meta.env.VITE_API_URL}/api/leads/assign-leads`)
 
 			setUploadMessage('CSV uploaded successfully')
@@ -175,7 +191,7 @@ const Leads = () => {
 		}
 	}
 
-		const handleDrop = (e) => {
+	const handleDrop = (e) => {
 		e.preventDefault()
 		const file = e.dataTransfer.files[0]
 		if (file && file.type === 'text/csv') {
@@ -198,7 +214,12 @@ const Leads = () => {
 						<span className='crumb current'>Leads</span>
 					</div>
 
-					<button className='add-leads-btn' onClick={() => setShowUploadModal(true)}>Add Leads</button>
+					<button
+						className='add-leads-btn'
+						onClick={() => setShowUploadModal(true)}
+					>
+						Add Leads
+					</button>
 				</div>
 
 				{/* Leads Table */}
@@ -217,7 +238,7 @@ const Leads = () => {
 							<div>Unassigned Leads</div>
 						</div>
 
-						{csvBatches.map((batch, index) => (
+						{filteredBatches.map((batch, index) => (
 							<div className='table-row' key={batch._id}>
 								<div>{String(index + 1).padStart(2, '0')}</div>
 								<div>{batch.name}</div>
@@ -251,8 +272,11 @@ const Leads = () => {
 				</div>
 			)} */}
 
-			{showUploadModal && (
-					<div className='modal-overlay' onClick={() => setShowUploadModal(false)}>
+				{showUploadModal && (
+					<div
+						className='modal-overlay'
+						onClick={() => setShowUploadModal(false)}
+					>
 						<div
 							className='modal upload-modal'
 							onClick={(e) => e.stopPropagation()}
@@ -284,12 +308,16 @@ const Leads = () => {
 							</div>
 							{csvFile && <p style={{ marginTop: '10px' }}>{csvFile.name}</p>}
 							<div className='modal-actions'>
-								<button onClick={() => setShowUploadModal(false)}>Cancel</button>
+								<button onClick={() => setShowUploadModal(false)}>
+									Cancel
+								</button>
 								<button disabled={uploading} onClick={handleCSVUpload}>
 									{uploading ? 'Uploading...' : 'Upload'}
 								</button>
 							</div>
-							{uploadMessage && <p className='upload-message'>{uploadMessage}</p>}
+							{uploadMessage && (
+								<p className='upload-message'>{uploadMessage}</p>
+							)}
 						</div>
 					</div>
 				)}
