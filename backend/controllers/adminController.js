@@ -1,6 +1,8 @@
 const User = require('../models/User')
 const Lead = require('../models/Lead');
 const Activity = require('../models/Activity');
+const Attendance = require('../models/Attendance') 
+const moment = require('moment')
 
 
 exports.getAdminDashboard = (req, res) => {
@@ -11,33 +13,85 @@ exports.getAdminDashboard = (req, res) => {
 // @desc    Get all employees
 // @route   GET /api/admin/employees
 // @access  Private (Admin only)
+
+// exports.getAllEmployees = async (req, res) => {
+//   try {
+//     const employees = await User.find({ role: 'employee' }).select('-password');
+
+//     const result = await Promise.all(
+//       employees.map(async (emp) => {
+//         const assignedCount = await Lead.countDocuments({ assignedTo: emp._id, status: { $ne: 'closed' } });
+//         const closedCount = await Lead.countDocuments({ assignedTo: emp._id, status: 'closed' });
+
+//         return {
+//           _id: emp._id,
+//           name: emp.name,
+//           email: emp.email,
+//           role: emp.role,
+//           status: emp.status,
+//           profileImageUrl: emp.profileImageUrl,
+//           assignedLeadsCount: assignedCount,
+//           closedLeadsCount: closedCount,
+//         };
+//       })
+//     );
+
+//     res.status(200).json(result);
+//   } catch (error) {
+//     res.status(500).json({ message: 'Server error', error: error.message });
+//   }
+// };
+
 exports.getAllEmployees = async (req, res) => {
   try {
-    const employees = await User.find({ role: 'employee' }).select('-password');
+    const employees = await User.find({ role: 'employee' }).select('-password')
+
+    const today = new Date().toISOString().split('T')[0] // 'YYYY-MM-DD'
 
     const result = await Promise.all(
       employees.map(async (emp) => {
-        const assignedCount = await Lead.countDocuments({ assignedTo: emp._id, status: { $ne: 'closed' } });
-        const closedCount = await Lead.countDocuments({ assignedTo: emp._id, status: 'closed' });
+        const [assignedCount, closedCount, attendanceToday] = await Promise.all([
+          Lead.countDocuments({ assignedTo: emp._id, status: { $ne: 'closed' } }),
+          Lead.countDocuments({ assignedTo: emp._id, status: 'closed' }),
+          Attendance.findOne({ user: emp._id, date: today })
+        ])
+
+        let status = 'inactive'
+
+        if (attendanceToday?.checkInTime) {
+          if (!attendanceToday.checkOutTime) {
+            // No checkout yet – still active
+            status = 'active'
+          } else {
+            // Compare checkout time with current time
+            const checkoutDateTime = moment(`${today} ${attendanceToday.checkOutTime}`, 'YYYY-MM-DD hh:mm A')
+            const now = moment()
+
+            if (checkoutDateTime.isAfter(now)) {
+              status = 'active'
+            }
+          }
+        }
 
         return {
           _id: emp._id,
           name: emp.name,
           email: emp.email,
           role: emp.role,
-          status: emp.status,
+          status,
           profileImageUrl: emp.profileImageUrl,
           assignedLeadsCount: assignedCount,
-          closedLeadsCount: closedCount,
-        };
+          closedLeadsCount: closedCount
+        }
       })
-    );
+    )
 
-    res.status(200).json(result);
+    res.status(200).json(result)
   } catch (error) {
-    res.status(500).json({ message: 'Server error', error: error.message });
+    res.status(500).json({ message: 'Server error', error: error.message })
   }
-};
+}
+
 
 
 // @desc    Edit employee
