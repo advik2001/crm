@@ -12,7 +12,8 @@
 
 /* Header Styles */
 .crm-header {
-  background: linear-gradient(135deg, #4F46E5 0%, #7C3AED 100%);
+  /* background: linear-gradient(135deg, #4F46E5 0%, #7C3AED 100%); */
+  background-color: #2051E5;
   padding: 20px;
   border-radius: 0 0 20px 20px;
   color: white;

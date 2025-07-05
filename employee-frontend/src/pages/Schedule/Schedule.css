@@ -12,7 +12,8 @@
 
 /* Header Styles */
 .crm-header {
-  background: linear-gradient(135deg, #4F46E5 0%, #7C3AED 100%);
+  /* background: linear-gradient(135deg, #4F46E5 0%, #7C3AED 100%); */
+  background-color: #2051E5;
   padding: 20px;
   border-radius: 0 0 20px 20px;
   color: white;
@@ -57,6 +58,38 @@
   color: #1f2937;
   margin: 0 0 15px 0;
 }
+
+
+
+/* Filter modal Styles */
+.filter-wrapper {
+	position: relative;
+}
+
+.filter-dropdown {
+	position: absolute;
+	right: 0;
+	top: 30px;
+	background: white;
+	border: 1px solid #ccc;
+	border-radius: 6px;
+	box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+	z-index: 10;
+}
+
+.filter-dropdown p {
+	margin: 0;
+	padding: 8px 12px;
+	cursor: pointer;
+}
+
+.filter-dropdown p:hover {
+	background-color: #f3f3f3;
+}
+
+
+
+
 
 /* Timing Card Styles */
 .timing-card {

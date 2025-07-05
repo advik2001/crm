@@ -316,6 +316,9 @@ const CanovaCRM = () => {
 		}
 	}
 
+	// Limit to the 10 most recent activities
+const recentGroupedActivities = groupedActivities.slice(0, 10)
+
 	return (
 		<div className='crm-container'>
 			{/* Header */}
@@ -392,7 +395,7 @@ const CanovaCRM = () => {
 				<div className='section'>
 					<h3 className='section-title'>Recent Activity</h3>
 					<div className='activity-card'>
-						{groupedActivities.map((activity) => (
+						{recentGroupedActivities.map((activity) => (
 							<div key={activity._id} className='activity-item'>
 								<div className='bullet-point'></div>
 								<div className='activity-text'>

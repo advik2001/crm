@@ -40,6 +40,7 @@
 
 // export default Navbar;
 
+
 import React from 'react'
 import { Home, Users, Calendar, User } from 'lucide-react'
 import { NavLink, useLocation } from 'react-router-dom'
@@ -76,12 +77,12 @@ const Navbar = () => {
         )
       })}
 
-      <div
+      {/* <div
         className='nav-indicator'
         style={{
           left: `${12.5 + navItems.findIndex(item => item.id === activeTab) * 25}%`
         }}
-      />
+      /> */}
     </div>
     
   )

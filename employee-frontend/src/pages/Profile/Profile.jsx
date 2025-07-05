@@ -292,7 +292,7 @@
 
 
 import React, { useState, useContext } from 'react'
-import { Home, Users, Calendar, User, Clock } from 'lucide-react'
+import { Home, Users, Calendar, User, Clock, ChevronLeft } from 'lucide-react'
 import './Profile.css'
 import Navbar from '../../components/Navbar'
 import { UserContext } from '../../context/UserContext'
@@ -380,7 +380,7 @@ const Profile = () => {
 					Canova<span className='logo-accent'>CRM</span>
 				</h1>
 				<p className='greeting'>Good Morning</p>
-				<h2 className='user-name'>{user?.name}</h2>
+				<h2 className='user-name'><ChevronLeft size={20} />Profile</h2>
 			</div>
 
 			{/* Content */}
