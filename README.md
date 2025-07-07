@@ -44,7 +44,8 @@ This CRM allows administrators to manage employees, assign leads, track conversi
 
 ## 🧑‍💼 Sample Credentials
 
-Employee login available through Admin Dashboard. Use the employee’s **first name** as password.  
+Employee login available through Admin Dashboard. Use the employee’s **last name** as password.
+If last name is not there then use the **first name** as password.
 Example:
 
 ```text
