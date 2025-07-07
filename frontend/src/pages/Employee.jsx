@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import './Employee.css'
 import { getInitials } from '../utils/helper'
-import { useSearch } from '../context/SearchContext' 
+import { useSearch } from '../context/SearchContext'
 
 const Employee = () => {
 	const [employees, setEmployees] = useState([]) // Raw data
@@ -56,7 +56,6 @@ const Employee = () => {
 		return sortConfig.direction === 'asc' ? aValue - bValue : bValue - aValue
 	})
 
-
 	const handleSort = (key) => {
 		setSortConfig((prev) => {
 			if (prev.key === key) {
@@ -75,15 +74,24 @@ const Employee = () => {
 	const handleAddEmployee = async (e) => {
 		e.preventDefault()
 		try {
+			const password =
+				newEmployee.lastName?.trim() !== ''
+					? newEmployee.lastName
+					: newEmployee.firstName
+
 			const payload = {
 				name: `${newEmployee.firstName} ${newEmployee.lastName}`,
 				email: newEmployee.email,
-				password: newEmployee.firstName,
+				password: password,
+				location: newEmployee.location,
+				language: newEmployee.language,
 			}
+
 			const response = await axios.post(
 				`${import.meta.env.VITE_API_URL}/api/auth/register`,
 				payload
 			)
+
 			setEmployees((prev) => [...prev, response.data])
 			setShowAddModal(false)
 			setNewEmployee({
@@ -162,11 +170,9 @@ const Employee = () => {
 		}
 	}
 
-
 	// Pagination logic
 	const indexOfLastEmployee = currentPage * employeesPerPage
 	const indexOfFirstEmployee = indexOfLastEmployee - employeesPerPage
-
 
 	// code for search functionality
 	const filteredEmployees = sortedEmployees.filter((emp) => {
@@ -180,20 +186,17 @@ const Employee = () => {
 
 	const totalPages = Math.ceil(filteredEmployees.length / employeesPerPage)
 
-	// Final employee data to be displayed 
+	// Final employee data to be displayed
 	const currentEmployees = filteredEmployees.slice(
 		indexOfFirstEmployee,
 		indexOfLastEmployee
 	)
-
 
 	const goToPage = (page) => {
 		if (page >= 1 && page <= totalPages) {
 			setCurrentPage(page)
 		}
 	}
-
-
 
 	if (loading) return <div>Loading employees...</div>
 	if (error) return <div>{error}</div>
@@ -222,8 +225,12 @@ const Employee = () => {
 								<tr>
 									<th onClick={() => handleSort('name')}>Name</th>
 									<th onClick={() => handleSort('_id')}>Employee ID</th>
-									<th onClick={() => handleSort('assignedLeadsCount')}>Assigned Leads</th>
-									<th onClick={() => handleSort('closedLeadsCount')}>Closed Leads</th>
+									<th onClick={() => handleSort('assignedLeadsCount')}>
+										Assigned Leads
+									</th>
+									<th onClick={() => handleSort('closedLeadsCount')}>
+										Closed Leads
+									</th>
 									<th onClick={() => handleSort('status')}>Status</th>
 									<th></th>
 								</tr>
@@ -361,7 +368,8 @@ const Employee = () => {
 										onChange={handleInputChange}
 									>
 										<option value='Delhi'>Delhi</option>
-										<option value='Mumbai'>Mumbai</option>
+										<option value='Pune'>Pune</option>
+										<option value='Hyderabad'>Hyderabad</option>
 									</select>
 								</div>
 								<div className='form-group'>
@@ -373,6 +381,8 @@ const Employee = () => {
 									>
 										<option value='Hindi'>Hindi</option>
 										<option value='English'>English</option>
+										<option value='Bengali'>Bengali</option>
+										<option value='Tamil'>Tamil</option>
 									</select>
 								</div>
 								<div className='form-footer'>

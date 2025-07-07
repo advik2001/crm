@@ -156,30 +156,8 @@ const Leads = () => {
 				)}
 
 				{showUploadModal && (
-					// <div className='modal-overlay'>
-					// 	<div className='modal'>
-					// 		<h3>CSV Upload</h3>
-					// 		<p>Add your documents </p>
-					// 		<input
-					// 			type='file'
-					// 			accept='.csv'
-					// 			onChange={(e) => setCsvFile(e.target.files[0])}
-					// 		/>
-					// 		<div className='modal-actions'>
-					// 			<button onClick={() => setShowUploadModal(false)}>
-					// 				Cancel
-					// 			</button>
-					// 			<button disabled={uploading} onClick={handleCSVUpload}>
-					// 				{uploading ? 'Uploading...' : 'Upload'}
-					// 			</button>
-					// 		</div>
-					// 		{uploadMessage && (
-					// 			<p className='upload-message'>{uploadMessage}</p>
-					// 		)}
-					// 	</div>
-					// </div>
-
-					<div className='modal-overlay'>
+					
+					<div className='modal-overlay' onClick={() => setShowUploadModal(false)}>
 						<div className='modal'>
 							<div className='modal-header'>
 								<div className='modal-title'>
