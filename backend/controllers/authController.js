@@ -11,8 +11,9 @@ const generateToken = (userId) => {
 //  @route  POST /api/auth/register
 //  @access  Public
 const registerUser = async (req, res) => { 
+
 	try {
-		const { name, email, password, profileImageUrl } = req.body
+		const { name, email, password, profileImageUrl, location, language } = req.body
 
 		// Check if user already exists
 		const userExists = await User.findOne({ email })
@@ -30,15 +31,18 @@ const registerUser = async (req, res) => {
 			email,
 			password: hashedPassword,
 			profileImageUrl,
+			location,
+			language,
 		})
 
-		// Return user data with jwt token
+		// Return user data 
 		res.status(201).json({
 			_id: user._id,
 			name: user.name,
 			email: user.email,
 			profileImageUrl: user.profileImageUrl,
-			// token: generateToken(user._id),
+			location: user.location,
+			language: user.language,
 		})
 	} catch (error) {
 		res.status(500).json({ message: 'Server error', error: error.message })
@@ -55,13 +59,13 @@ const loginUser = async(req, res) => {
 		// Check if user exists
 		const user = await User.findOne({ email })
 		if (!user) {
-			return res.status(500).json({ message: 'Invalid email or password' })
+			return res.status(401).json({ message: 'Invalid email or password' })
 		}
 
 		// Compare password
 		const isMatch = await bcrypt.compare(password, user.password)
 		if (!isMatch) {
-			return res.status(500).json({ message: 'Invalid email or password' })
+			return res.status(401).json({ message: 'Invalid email or password' })
 		}
 
 		// Return user data with JWT
@@ -71,6 +75,8 @@ const loginUser = async(req, res) => {
 			email: user.email,
 			role: user.role,
 			profileImageUrl: user.profileImageUrl,
+			location: user.location,
+			language: user.language,
 		})
 	} catch (error) {
 		res.status(500).json({ message: 'Server error', error: error.message })

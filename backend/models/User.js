@@ -18,6 +18,8 @@ const UserSchema = new mongoose.Schema(
 			enum: ['active', 'inactive'],
 			default: 'active',
 		},
+		location: { type: String, default: 'Delhi' }, 
+		language: { type: String, default: 'Hindi' },
 		assignedLeads: [
 			{
 				type: mongoose.Schema.Types.ObjectId,

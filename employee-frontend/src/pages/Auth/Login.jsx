@@ -65,7 +65,7 @@ const Login = () => {
 			if (response.status === 200) {
 				console.log(response.data)
 				updateUser(response.data) // Save user in context
-				const userId = response.data._id // Adjust this if user ID is nested (e.g., response.data.user._id)
+				const userId = response.data._id 
 
 				// Step 2: Attendance Check-In API
 				await axios.post(`${import.meta.env.VITE_API_URL}/api/attendence/checkin`, {
